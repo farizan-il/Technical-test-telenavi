@@ -42,7 +42,6 @@ Proyek ini merupakan implementasi **Todo List API** sebagai bagian dari Technica
 - [Instalasi dan Konfigurasi](#-instalasi-dan-konfigurasi)
 - [Struktur Database](#-struktur-database)
 - [Dokumentasi API](#-dokumentasi-api)
-- [Pengujian](#-pengujian)
 
 ---
 
