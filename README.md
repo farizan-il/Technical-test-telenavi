@@ -68,7 +68,7 @@ Pastikan lingkungan development Anda memenuhi persyaratan berikut:
 
 ```bash
 git clone https://github.com/farizan-il/Technical-test-telenavi.git
-cd todo-backend
+cd Technical-test-telenavi
 ```
 
 ### 2️⃣ Instalasi Dependencies
