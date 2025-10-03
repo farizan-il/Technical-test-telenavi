@@ -140,17 +140,16 @@ Aplikasi akan tersedia di: **http://127.0.0.1:8000**
 
 ### 📦 Postman Collection
 
-File Postman Collection tersedia di folder docs/ untuk memudahkan testing API.
-Lokasi: docs/Todo_API_Collection.json
-Cara Import:
+File Postman Collection tersedia di folder `docs/` untuk memudahkan testing API.
 
-Buka Postman
-Klik Import di pojok kiri atas
-Pilih file docs/Todo_API_Collection.json dari project folder
-Klik Import
-Collection siap digunakan! 🚀
+**Lokasi:** `docs/Todo_API_Collection.json`
 
-Panduan Lengkap: Lihat file docs/POSTMAN_GUIDE.md untuk tutorial step-by-step
+**Cara Import:**
+1. Buka Postman
+2. Klik **Import** di pojok kiri atas
+3. Pilih file `docs/Todo_API_Collection.json` dari project folder
+4. Klik **Import**
+5. Collection siap digunakan! 🚀
 
 ---
 
