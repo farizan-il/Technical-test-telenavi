@@ -1,0 +1,1005 @@
+{
+  "info": {
+    "name": "Todo List API - Technical Test (Ilham Farizan)",
+    "description": "Collection untuk testing Todo List API  - CRUD, filtering, Excel export, dan chart data aggregation",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "12345678"
+  },
+  "item": [
+    {
+      "name": "Todos",
+      "item": [
+        {
+          "name": "Get All Todos",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/todos",
+              "host": ["{{base_url}}"],
+              "path": ["api", "todos"]
+            },
+            "description": "Mendapatkan semua data todos"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Todo - Laporan Keuangan",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Menyusun laporan keuangan Q4 2025\",\n  \"assignee\": \"Budi Santoso\",\n  \"due_date\": \"2025-10-25\",\n  \"priority\": \"high\",\n  \"status\": \"pending\",\n  \"time_tracked\": 0\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/todos",
+              "host": ["{{base_url}}"],
+              "path": ["api", "todos"]
+            },
+            "description": "Membuat todo baru dengan validasi:\n- title: required\n- due_date: required, tidak boleh masa lalu (after_or_equal:today)\n- priority: required (low, medium, high)\n- status: optional, default pending\n- time_tracked: optional, default 0"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Todo - Meeting Klien",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Meeting dengan klien dari Surabaya\",\n  \"assignee\": \"Siti Nurhaliza\",\n  \"due_date\": \"2025-10-10\",\n  \"priority\": \"medium\",\n  \"status\": \"open\",\n  \"time_tracked\": 0\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/todos",
+              "host": ["{{base_url}}"],
+              "path": ["api", "todos"]
+            },
+            "description": "Contoh create todo untuk meeting dengan klien"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Todo - Development Task",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Develop fitur pembayaran QRIS\",\n  \"assignee\": \"Ahmad Dahlan\",\n  \"due_date\": \"2025-10-20\",\n  \"priority\": \"high\",\n  \"status\": \"in_progress\",\n  \"time_tracked\": 120\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/todos",
+              "host": ["{{base_url}}"],
+              "path": ["api", "todos"]
+            },
+            "description": "Contoh create todo untuk development task"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Todo - Invalid (Past Date)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Todo dengan tanggal masa lalu\",\n  \"assignee\": \"Dewi Lestari\",\n  \"due_date\": \"2024-01-01\",\n  \"priority\": \"medium\",\n  \"status\": \"pending\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/todos",
+              "host": ["{{base_url}}"],
+              "path": ["api", "todos"]
+            },
+            "description": "Test validasi: due_date tidak boleh masa lalu (harus return error 422)"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Todo - Without Assignee",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Update database pelanggan\",\n  \"due_date\": \"2025-10-15\",\n  \"priority\": \"low\",\n  \"status\": \"pending\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/todos",
+              "host": ["{{base_url}}"],
+              "path": ["api", "todos"]
+            },
+            "description": "Test create todo tanpa assignee (nullable)"
+          },
+          "response": []
+        }
+      ],
+      "description": "CRUD operations untuk Todo items dengan contoh data Indonesia"
+    },
+    {
+      "name": "Filtering & Search",
+      "item": [
+        {
+          "name": "Filter by Title - Laporan",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/todos?title=laporan",
+              "host": ["{{base_url}}"],
+              "path": ["api", "todos"],
+              "query": [
+                {
+                  "key": "title",
+                  "value": "laporan",
+                  "description": "Partial match untuk title yang mengandung 'laporan'"
+                }
+              ]
+            },
+            "description": "Filter todos berdasarkan title (partial match) - mencari semua todo yang mengandung kata 'laporan'"
+          },
+          "response": []
+        },
+        {
+          "name": "Filter by Title - Meeting",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/todos?title=meeting",
+              "host": ["{{base_url}}"],
+              "path": ["api", "todos"],
+              "query": [
+                {
+                  "key": "title",
+                  "value": "meeting",
+                  "description": "Mencari todo yang berisi kata 'meeting'"
+                }
+              ]
+            },
+            "description": "Filter todos yang berhubungan dengan meeting"
+          },
+          "response": []
+        },
+        {
+          "name": "Filter by Status - Pending",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/todos?status=pending",
+              "host": ["{{base_url}}"],
+              "path": ["api", "todos"],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "pending",
+                  "description": "Filter todos dengan status pending"
+                }
+              ]
+            },
+            "description": "Filter todos dengan status pending saja"
+          },
+          "response": []
+        },
+        {
+          "name": "Filter by Status - Multiple",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/todos?status=pending,in_progress",
+              "host": ["{{base_url}}"],
+              "path": ["api", "todos"],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "pending,in_progress",
+                  "description": "Multiple status separated by comma"
+                }
+              ]
+            },
+            "description": "Filter todos dengan multiple status (comma separated)"
+          },
+          "response": []
+        },
+        {
+          "name": "Filter by Priority - High",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/todos?priority=high",
+              "host": ["{{base_url}}"],
+              "path": ["api", "todos"],
+              "query": [
+                {
+                  "key": "priority",
+                  "value": "high",
+                  "description": "Filter todos prioritas tinggi"
+                }
+              ]
+            },
+            "description": "Filter todos dengan prioritas high saja"
+          },
+          "response": []
+        },
+        {
+          "name": "Filter by Priority - Multiple",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/todos?priority=high,medium",
+              "host": ["{{base_url}}"],
+              "path": ["api", "todos"],
+              "query": [
+                {
+                  "key": "priority",
+                  "value": "high,medium",
+                  "description": "Multiple priority separated by comma"
+                }
+              ]
+            },
+            "description": "Filter todos dengan multiple priority (comma separated)"
+          },
+          "response": []
+        },
+        {
+          "name": "Filter by Assignee - Budi Santoso",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/todos?assignee=Budi Santoso",
+              "host": ["{{base_url}}"],
+              "path": ["api", "todos"],
+              "query": [
+                {
+                  "key": "assignee",
+                  "value": "Budi Santoso",
+                  "description": "Filter todos yang ditugaskan ke Budi Santoso"
+                }
+              ]
+            },
+            "description": "Filter todos untuk assignee tertentu"
+          },
+          "response": []
+        },
+        {
+          "name": "Filter by Assignee - Siti Nurhaliza",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/todos?assignee=Siti Nurhaliza",
+              "host": ["{{base_url}}"],
+              "path": ["api", "todos"],
+              "query": [
+                {
+                  "key": "assignee",
+                  "value": "Siti Nurhaliza",
+                  "description": "Filter todos untuk Siti Nurhaliza (ada 5 task khusus)"
+                }
+              ]
+            },
+            "description": "Filter todos untuk Siti Nurhaliza - seeder membuat 5 task khusus untuk testing"
+          },
+          "response": []
+        },
+        {
+          "name": "Filter by Assignee - Multiple",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/todos?assignee=Budi Santoso,Siti Nurhaliza,Ahmad Dahlan",
+              "host": ["{{base_url}}"],
+              "path": ["api", "todos"],
+              "query": [
+                {
+                  "key": "assignee",
+                  "value": "Budi Santoso,Siti Nurhaliza,Ahmad Dahlan",
+                  "description": "Multiple assignee separated by comma"
+                }
+              ]
+            },
+            "description": "Filter todos dengan multiple assignee (comma separated)"
+          },
+          "response": []
+        },
+        {
+          "name": "Filter by Date Range - Oktober 2025",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/todos?start=2025-10-01&end=2025-10-31",
+              "host": ["{{base_url}}"],
+              "path": ["api", "todos"],
+              "query": [
+                {
+                  "key": "start",
+                  "value": "2025-10-01",
+                  "description": "Start date (YYYY-MM-DD)"
+                },
+                {
+                  "key": "end",
+                  "value": "2025-10-31",
+                  "description": "End date (YYYY-MM-DD)"
+                }
+              ]
+            },
+            "description": "Filter todos berdasarkan range due_date bulan Oktober 2025 (seeder ada 10 data khusus)"
+          },
+          "response": []
+        },
+        {
+          "name": "Filter by Date Range - Next 7 Days",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/todos?start=2025-10-03&end=2025-10-10",
+              "host": ["{{base_url}}"],
+              "path": ["api", "todos"],
+              "query": [
+                {
+                  "key": "start",
+                  "value": "2025-10-03",
+                  "description": "Start date (hari ini)"
+                },
+                {
+                  "key": "end",
+                  "value": "2025-10-10",
+                  "description": "End date (7 hari ke depan)"
+                }
+              ]
+            },
+            "description": "Filter todos untuk 7 hari ke depan (deadline mendesak)"
+          },
+          "response": []
+        },
+        {
+          "name": "Filter by Time Tracked - 1-2 jam",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/todos?min=60&max=120",
+              "host": ["{{base_url}}"],
+              "path": ["api", "todos"],
+              "query": [
+                {
+                  "key": "min",
+                  "value": "60",
+                  "description": "Minimum 60 menit (1 jam)"
+                },
+                {
+                  "key": "max",
+                  "value": "120",
+                  "description": "Maximum 120 menit (2 jam)"
+                }
+              ]
+            },
+            "description": "Filter todos dengan time tracked antara 1-2 jam"
+          },
+          "response": []
+        },
+        {
+          "name": "Filter by Time Tracked - Above 4 hours",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/todos?min=240&max=999",
+              "host": ["{{base_url}}"],
+              "path": ["api", "todos"],
+              "query": [
+                {
+                  "key": "min",
+                  "value": "240",
+                  "description": "Minimum 240 menit (4 jam)"
+                },
+                {
+                  "key": "max",
+                  "value": "999",
+                  "description": "Maximum 999 menit"
+                }
+              ]
+            },
+            "description": "Filter todos yang memakan waktu lebih dari 4 jam (task berat)"
+          },
+          "response": []
+        },
+        {
+          "name": "Combined Filters - Urgent Tasks",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/todos?status=pending,open&priority=high&start=2025-10-01&end=2025-10-15",
+              "host": ["{{base_url}}"],
+              "path": ["api", "todos"],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "pending,open"
+                },
+                {
+                  "key": "priority",
+                  "value": "high"
+                },
+                {
+                  "key": "start",
+                  "value": "2025-10-01"
+                },
+                {
+                  "key": "end",
+                  "value": "2025-10-15"
+                }
+              ]
+            },
+            "description": "Kombinasi filter untuk mencari task urgent yang belum dikerjakan dalam 2 minggu ke depan"
+          },
+          "response": []
+        },
+        {
+          "name": "Combined Filters - Budi's Completed Tasks",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/todos?assignee=Budi Santoso&status=completed&priority=high",
+              "host": ["{{base_url}}"],
+              "path": ["api", "todos"],
+              "query": [
+                {
+                  "key": "assignee",
+                  "value": "Budi Santoso"
+                },
+                {
+                  "key": "status",
+                  "value": "completed"
+                },
+                {
+                  "key": "priority",
+                  "value": "high"
+                }
+              ]
+            },
+            "description": "Filter task prioritas tinggi yang sudah diselesaikan oleh Budi Santoso"
+          },
+          "response": []
+        },
+        {
+          "name": "Combined Filters - Laporan In Progress",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/todos?title=laporan&status=in_progress",
+              "host": ["{{base_url}}"],
+              "path": ["api", "todos"],
+              "query": [
+                {
+                  "key": "title",
+                  "value": "laporan"
+                },
+                {
+                  "key": "status",
+                  "value": "in_progress"
+                }
+              ]
+            },
+            "description": "Filter semua laporan yang sedang dalam proses pengerjaan"
+          },
+          "response": []
+        }
+      ],
+      "description": "Endpoints untuk filtering dan searching todos dengan contoh data Indonesia yang realistis"
+    },
+    {
+      "name": "Reports",
+      "item": [
+        {
+          "name": "Generate Excel Report - All Data",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/todos?export=excel",
+              "host": ["{{base_url}}"],
+              "path": ["api", "todos"],
+              "query": [
+                {
+                  "key": "export",
+                  "value": "excel",
+                  "description": "Trigger Excel export"
+                }
+              ]
+            },
+            "description": "Download Excel report dengan SEMUA data todos (130+ records).\n\nFitur:\n- Export ke format .xlsx\n- Summary row dengan total todos dan total time tracked\n- Format yang rapi dan siap cetak\n\nCARA MENGGUNAKAN:\n1. Klik Send\n2. Klik 'Save Response' > 'Save to a file'\n3. File akan terdownload otomatis dengan nama todos_YYYY-MM-DD_HHMMSS.xlsx"
+          },
+          "response": []
+        },
+        {
+          "name": "Generate Excel Report - Pending & High Priority",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/todos?export=excel&status=pending,open&priority=high",
+              "host": ["{{base_url}}"],
+              "path": ["api", "todos"],
+              "query": [
+                {
+                  "key": "export",
+                  "value": "excel"
+                },
+                {
+                  "key": "status",
+                  "value": "pending,open"
+                },
+                {
+                  "key": "priority",
+                  "value": "high"
+                }
+              ]
+            },
+            "description": "Download Excel report untuk task urgent yang belum dikerjakan.\n\nBerguna untuk:\n- Review task prioritas tinggi\n- Planning work assignment\n- Meeting progress review"
+          },
+          "response": []
+        },
+        {
+          "name": "Generate Excel Report - Completed Tasks",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/todos?export=excel&status=completed",
+              "host": ["{{base_url}}"],
+              "path": ["api", "todos"],
+              "query": [
+                {
+                  "key": "export",
+                  "value": "excel"
+                },
+                {
+                  "key": "status",
+                  "value": "completed"
+                }
+              ]
+            },
+            "description": "Download Excel report untuk semua task yang sudah selesai.\n\nBerguna untuk:\n- Performance review\n- Time tracking analysis\n- Productivity report"
+          },
+          "response": []
+        },
+        {
+          "name": "Generate Excel Report - By Assignee (Budi)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/todos?export=excel&assignee=Budi Santoso",
+              "host": ["{{base_url}}"],
+              "path": ["api", "todos"],
+              "query": [
+                {
+                  "key": "export",
+                  "value": "excel"
+                },
+                {
+                  "key": "assignee",
+                  "value": "Budi Santoso"
+                }
+              ]
+            },
+            "description": "Download Excel report untuk semua task Budi Santoso"
+          },
+          "response": []
+        },
+        {
+          "name": "Generate Excel Report - By Assignee (Siti)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/todos?export=excel&assignee=Siti Nurhaliza",
+              "host": ["{{base_url}}"],
+              "path": ["api", "todos"],
+              "query": [
+                {
+                  "key": "export",
+                  "value": "excel"
+                },
+                {
+                  "key": "assignee",
+                  "value": "Siti Nurhaliza"
+                }
+              ]
+            },
+            "description": "Download Excel report untuk task Siti Nurhaliza (seeder ada 5 task khusus)"
+          },
+          "response": []
+        },
+        {
+          "name": "Generate Excel Report - Oktober 2025",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/todos?export=excel&start=2025-10-01&end=2025-10-31",
+              "host": ["{{base_url}}"],
+              "path": ["api", "todos"],
+              "query": [
+                {
+                  "key": "export",
+                  "value": "excel"
+                },
+                {
+                  "key": "start",
+                  "value": "2025-10-01"
+                },
+                {
+                  "key": "end",
+                  "value": "2025-10-31"
+                }
+              ]
+            },
+            "description": "Download Excel report untuk todos bulan Oktober 2025.\n\nBerguna untuk:\n- Monthly planning\n- Monthly report\n- Progress tracking bulanan"
+          },
+          "response": []
+        },
+        {
+          "name": "Generate Excel Report - Laporan Tasks",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/todos?export=excel&title=laporan",
+              "host": ["{{base_url}}"],
+              "path": ["api", "todos"],
+              "query": [
+                {
+                  "key": "export",
+                  "value": "excel"
+                },
+                {
+                  "key": "title",
+                  "value": "laporan"
+                }
+              ]
+            },
+            "description": "Download Excel report untuk semua task yang berhubungan dengan laporan (seeder ada 5+ task khusus)"
+          },
+          "response": []
+        },
+        {
+          "name": "Generate Excel Report - Heavy Tasks (4+ hours)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/todos?export=excel&min=240&max=999&status=completed",
+              "host": ["{{base_url}}"],
+              "path": ["api", "todos"],
+              "query": [
+                {
+                  "key": "export",
+                  "value": "excel"
+                },
+                {
+                  "key": "min",
+                  "value": "240"
+                },
+                {
+                  "key": "max",
+                  "value": "999"
+                },
+                {
+                  "key": "status",
+                  "value": "completed"
+                }
+              ]
+            },
+            "description": "Download Excel report untuk task berat yang memakan waktu 4 jam atau lebih.\n\nBerguna untuk:\n- Analyze complex tasks\n- Estimate future similar tasks\n- Resource planning"
+          },
+          "response": []
+        },
+        {
+          "name": "Generate Excel Report - Combined Filters",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/todos?export=excel&status=completed&assignee=Budi Santoso,Siti Nurhaliza&start=2025-10-01&end=2025-12-31",
+              "host": ["{{base_url}}"],
+              "path": ["api", "todos"],
+              "query": [
+                {
+                  "key": "export",
+                  "value": "excel"
+                },
+                {
+                  "key": "status",
+                  "value": "completed"
+                },
+                {
+                  "key": "assignee",
+                  "value": "Budi Santoso,Siti Nurhaliza"
+                },
+                {
+                  "key": "start",
+                  "value": "2025-10-01"
+                },
+                {
+                  "key": "end",
+                  "value": "2025-12-31"
+                }
+              ]
+            },
+            "description": "Download Excel report dengan kombinasi multiple filters untuk analisis spesifik"
+          },
+          "response": []
+        }
+      ],
+      "description": "Endpoints untuk generate Excel reports dengan berbagai filter.\n\n⚠️ IMPORTANT untuk download Excel di Postman:\n1. Klik Send\n2. Klik 'Save Response' > 'Save to a file'\n3. File Excel akan tersimpan di komputer Anda"
+    },
+    {
+      "name": "Charts",
+      "item": [
+        {
+          "name": "Get Chart Data - By Status",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/todos/chart",
+              "host": ["{{base_url}}"],
+              "path": ["api", "todos", "chart"]
+            },
+            "description": "Mendapatkan data agregat todos berdasarkan status.\n\nResponse format:\n```json\n{\n  \"status_summary\": {\n    \"pending\": 35,\n    \"open\": 28,\n    \"in_progress\": 32,\n    \"completed\": 40\n  }\n}\n```\n\nBerguna untuk:\n- Dashboard overview\n- Status distribution chart\n- Workload analysis"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Chart Data - By Priority",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/todos/chart/priority",
+              "host": ["{{base_url}}"],
+              "path": ["api", "todos", "chart", "priority"]
+            },
+            "description": "Mendapatkan data agregat todos berdasarkan priority.\n\nResponse format:\n```json\n{\n  \"priority_summary\": {\n    \"low\": 40,\n    \"medium\": 45,\n    \"high\": 50\n  }\n}\n```\n\nBerguna untuk:\n- Priority distribution analysis\n- Resource allocation planning\n- Urgent tasks monitoring"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Chart Data - By Assignee",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/todos/chart/assignee",
+              "host": ["{{base_url}}"],
+              "path": ["api", "todos", "chart", "assignee"]
+            },
+            "description": "Mendapatkan data agregat todos berdasarkan assignee dengan detail lengkap.\n\nResponse format:\n```json\n{\n  \"assignee_summary\": {\n    \"Budi Santoso\": {\n      \"total_todos\": 15,\n      \"total_pending_todos\": 5,\n      \"total_timetracked_completed_todos\": 480\n    },\n    \"Siti Nurhaliza\": {\n      \"total_todos\": 12,\n      \"total_pending_todos\": 3,\n      \"total_timetracked_completed_todos\": 360\n    },\n    \"Ahmad Dahlan\": {\n      \"total_todos\": 10,\n      \"total_pending_todos\": 4,\n      \"total_timetracked_completed_todos\": 300\n    }\n  }\n}\n```\n\nKeterangan:\n- total_todos: Total semua todo yang ditugaskan ke person\n- total_pending_todos: Total todo dengan status pending (backlog)\n- total_timetracked_completed_todos: Total waktu (menit) dari todo yang sudah completed\n\nBerguna untuk:\n- Team performance dashboard\n- Workload distribution analysis\n- Individual productivity tracking\n- Time tracking per person"
+          },
+          "response": []
+        }
+      ],
+      "description": "Endpoints untuk mendapatkan data agregat untuk visualisasi chart/dashboard"
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://127.0.0.1:8000",
+      "type": "string"
+    }
+  ]
+}
