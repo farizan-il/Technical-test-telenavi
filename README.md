@@ -1,11 +1,11 @@
 <p align="center">
-  <a href="[GANTI DENGAN LINKEDIN ANDA]" target="_blank">
+  <a href="https:linkeidn" target="_blank">
     <img src="https://img.shields.io/badge/LinkedIn-Connect-blue?style=for-the-badge&logo=linkedin" alt="LinkedIn">
   </a>
 </p>
 
 <p align="center">
-  <a href="[GANTI DENGAN URL REPO ANDA]/actions/workflows/tests.yml">
+  <a href="https://github.com/farizan-il/Technical-test-telenavi.git">
     <img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status">
   </a>
   <a href="https://packagist.org/packages/laravel/framework">
@@ -26,14 +26,13 @@
 
 ## 📖 Tentang Proyek
 
-Proyek ini merupakan implementasi **Todo List API** sebagai bagian dari Technical Test Backend Developer. Sistem dibangun menggunakan **Laravel 10/11** dengan arsitektur RESTful API yang mendukung:
+Proyek ini merupakan implementasi **Todo List API** sebagai bagian dari Technical Test Backend Developer. Sistem dibangun menggunakan **Laravel 12** dengan arsitektur RESTful API yang mendukung:
 
 - ✅ CRUD operations untuk todo items
 - 🔍 Advanced filtering dan searching
 - 📊 Export data ke format Excel
 - 📈 Data agregat untuk visualisasi chart
 - ✨ Validasi data yang ketat
-- 🧪 Comprehensive testing dengan PHPUnit
 
 ---
 
@@ -44,7 +43,6 @@ Proyek ini merupakan implementasi **Todo List API** sebagai bagian dari Technica
 - [Struktur Database](#-struktur-database)
 - [Dokumentasi API](#-dokumentasi-api)
 - [Pengujian](#-pengujian)
-- [Kontak](#-kontak)
 
 ---
 
@@ -69,7 +67,7 @@ Pastikan lingkungan development Anda memenuhi persyaratan berikut:
 ### 1️⃣ Clone Repositori
 
 ```bash
-git clone [GANTI DENGAN URL REPO GITHUB ANDA]
+git clone https://github.com/farizan-il/Technical-test-telenavi.git
 cd todo-backend
 ```
 
@@ -95,9 +93,9 @@ Edit file `.env` dan sesuaikan dengan kredensial database Anda:
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=[NAMA_DATABASE_ANDA]
-DB_USERNAME=[USERNAME_DATABASE_ANDA]
-DB_PASSWORD=[PASSWORD_DATABASE_ANDA]
+DB_DATABASE=
+DB_USERNAME=
+DB_PASSWORD=
 ```
 
 ### 4️⃣ Setup Database
@@ -297,45 +295,6 @@ GET /api/chart?type=assignee
 - `total_todos` - Total semua todo yang ditugaskan
 - `total_pending_todos` - Total todo dengan status pending
 - `total_timetracked_completed_todos` - Total waktu (menit) dari todo yang sudah completed
-
----
-
-## 🧪 Pengujian
-
-Proyek ini dilengkapi dengan comprehensive testing menggunakan **PHPUnit**.
-
-### Menjalankan Test
-
-```bash
-php artisan test
-```
-
-### Test Coverage
-
-File test terletak di: `tests/Feature/TodoTest.php`
-
-**Test Cases:**
-- ✅ Create todo dengan data valid
-- ✅ Validasi due_date tidak boleh masa lalu
-- ✅ Generate Excel report dengan berbagai filter
-- ✅ Chart data by status
-- ✅ Chart data by priority
-- ✅ Chart data by assignee dengan agregasi lengkap
-
-### Contoh Output
-
-```bash
-PASS  Tests\Feature\TodoTest
-✓ can create a todo                                    0.45s
-✓ cannot create a todo with past due date              0.12s
-✓ can generate excel report with filters               0.78s
-✓ can get chart data by status                         0.23s
-✓ can get chart data by priority                       0.21s
-✓ can get chart data by assignee                       0.34s
-
-Tests:    6 passed (28 assertions)
-Duration: 2.13s
-```
 
 ---
 
